@@ -19,40 +19,13 @@
  */
 package com.ngdata.sep.impl.fork;
 
-import java.io.EOFException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.lang.management.ManagementFactory;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.NavigableMap;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.hbase.HConstants;
-import org.apache.hadoop.hbase.KeyValue;
-import org.apache.hadoop.hbase.ServerName;
-import org.apache.hadoop.hbase.Stoppable;
-import org.apache.hadoop.hbase.TableNotFoundException;
+import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.HConnection;
 import org.apache.hadoop.hbase.client.HConnectionManager;
 import org.apache.hadoop.hbase.ipc.HRegionInterface;
@@ -74,6 +47,19 @@ import org.apache.zookeeper.KeeperException;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.management.ManagementFactory;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.URLEncoder;
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Forked version of org.apache.hadoop.hbase.replication.regionserver.ReplicationSource. Updated to be more
@@ -1093,7 +1079,6 @@ public class ForkedReplicationSource extends Thread
     }
 
     // SEP change: needed because we use replicationsource from 0.94.8 with older hbase in cdh 4.2.0
-    @Override
     public String getStats() {
         return "Total replicated edits: " + totalReplicatedEdits + ", currently replicating from: " + this.currentPath
                 + " at position: " + lastLoggedPosition;

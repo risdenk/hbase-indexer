@@ -32,7 +32,7 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-common</artifactId>
+      <artifactId>hadoop-core</artifactId>
       <version>${version.hadoop}</version>
     </dependency>
     <!-- Normally, client applications don't need to depend on hbase-indexer stuff, we only
