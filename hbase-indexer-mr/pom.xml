@@ -29,10 +29,6 @@
     <relativePath>..</relativePath>
   </parent>
 
-  <properties>
-    <hadoop.version>${version.hadoop.mr1.hbase98}</hadoop.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.ngdata</groupId>
@@ -49,10 +45,22 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>com.cloudera.search</groupId>
-      <artifactId>search-mr</artifactId>
-    </dependency>
+      <dependency>
+          <groupId>net.sourceforge.argparse4j</groupId>
+          <artifactId>argparse4j</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.kitesdk</groupId>
+          <artifactId>kite-morphlines-core</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.solr</groupId>
+          <artifactId>solr-core</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.solr</groupId>
+          <artifactId>solr-map-reduce</artifactId>
+      </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
@@ -178,25 +186,6 @@
         </dependency>
         <dependency>
           <groupId>org.apache.hadoop</groupId>
-          <artifactId>hadoop-test</artifactId>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase-hadoop2-compat</artifactId>
-          <type>test-jar</type>
-          <scope>test</scope>
-          <version>${version.hbase96}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase-hadoop-compat</artifactId>
-          <type>test-jar</type>
-          <scope>test</scope>
-          <version>${version.hbase96}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.hadoop</groupId>
           <artifactId>hadoop-common</artifactId>
           <classifier>tests</classifier>
           <scope>test</scope>
@@ -228,13 +217,12 @@
         <dependency>
           <groupId>org.apache.hadoop</groupId>
           <artifactId>hadoop-client</artifactId>
-          <version>${hadoop.version}</version>
+          <version>${version.hadoop}</version>
           <scope>provided</scope>
         </dependency>
         <dependency>
           <groupId>org.apache.hadoop</groupId>
           <artifactId>hadoop-minicluster</artifactId>
-          <version>${hadoop.version}</version>
           <scope>test</scope>
         </dependency>
         <dependency>

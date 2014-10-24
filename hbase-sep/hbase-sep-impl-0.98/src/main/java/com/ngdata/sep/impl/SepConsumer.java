@@ -140,7 +140,7 @@ public class SepConsumer extends BaseHRegionServer {
           hbaseConf,
           new FifoRpcScheduler(hbaseConf, hbaseConf.getInt("hbase.regionserver.handler.count", 10)));
 
-        this.serverName = new ServerName(hostName, rpcServer.getListenerAddress().getPort(), System.currentTimeMillis());
+        this.serverName = ServerName.valueOf(hostName, rpcServer.getListenerAddress().getPort(), System.currentTimeMillis());
         this.zkWatcher = new ZooKeeperWatcher(hbaseConf, this.serverName.toString(), null);
 
         // login the zookeeper client principal (if using security)

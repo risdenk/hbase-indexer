@@ -22,7 +22,6 @@ import org.apache.hadoop.hbase.Server;
 import org.apache.hadoop.hbase.ServerName;
 import org.apache.hadoop.hbase.catalog.CatalogTracker;
 import org.apache.hadoop.hbase.protobuf.generated.AdminProtos;
-import org.apache.hadoop.hbase.protobuf.generated.ClientProtos;
 import org.apache.hadoop.hbase.zookeeper.ZooKeeperWatcher;
 
 /**
@@ -157,10 +156,5 @@ public class BaseHRegionServer implements AdminProtos.AdminService.BlockingInter
   @Override
   public int getPriority(org.apache.hadoop.hbase.protobuf.generated.RPCProtos.RequestHeader header, com.google.protobuf.Message param) {
     return org.apache.hadoop.hbase.HConstants.NORMAL_QOS;
-  }
-
-  @Override
-  public long getDeadline(org.apache.hadoop.hbase.protobuf.generated.RPCProtos.RequestHeader header, com.google.protobuf.Message param) {
-    return 0;
   }
 }

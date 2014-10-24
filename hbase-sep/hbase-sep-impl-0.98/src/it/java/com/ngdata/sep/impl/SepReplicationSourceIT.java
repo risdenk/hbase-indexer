@@ -84,7 +84,7 @@ public class SepReplicationSourceIT {
         sepReplicationSource = new SepReplicationSource();
         Configuration conf = hbaseTestUtil.getConfiguration();
         ReplicationPeers replicationPeers = mock(ReplicationPeers.class);
-        when(replicationPeers.getTableCFs(anyString())).thenReturn(null);
+        //when(replicationPeers.getTableCFs(anyString())).thenReturn(null);
         sepReplicationSource.init(conf, FileSystem.get(conf), mock(ReplicationSourceManager.class),
                                   mock(ReplicationQueues.class), replicationPeers,
                                   mock(Stoppable.class), "/hbase.replication", UUID.randomUUID());
